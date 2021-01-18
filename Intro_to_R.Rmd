@@ -1,0 +1,1279 @@
+---
+title: "Introduction to R"
+author: "Ravi K Patel"
+date: "Jan 12, 2021"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
+    toc_depth: 6
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Overview
+- **Background on R**
+- **Basic syntax**
+  - Code statement
+    - Comments
+    - Operation
+  - Variable
+  - Assignment operator
+- **Data types**
+  - Numeric
+  - Character
+  - Logical (boolean)
+- **Operators**
+  - Arithmetic
+  - Relational
+  - Logical
+- **Control statements**
+  - if..else
+  - for
+- **Data structures**
+  - Vector
+  - Factor
+  - Matrix
+  - Lists
+  - Data frame
+- **File reading-writing**
+  - `setwd()`
+- **R functions**
+
+
+&nbsp;
+
+### Basic syntax
+#### *Code statement*
+Broadly speaking, the code statement can take two forms: 
+
+1. a comment (a text in English to explain the code): R makes use of the # sign to add comments, so that you and others can understand what the R code is about. Just like Twitter! Comments are not run as R code, so they will not influence your result. Using too many comments is never too much.
+2. operations: Operations can take many shapes and forms. They can be as simple as addition of 2 and 3 or can be very complex. We will look at a larger variety of operations in this lecture. Hang on, hold tight!
+```{r code_statement}
+# This is a comment.
+
+
+# Operation
+5 + 7
+
+
+# I have 5 apples and 7 oranges. I have 5 + 7 fruits.
+5 + 7
+```
+
+
+
+
+
+&nbsp;
+
+#### *Variables and the assignment operator ( "<-" or "=")*
+Like we saw above, when we performed the "addition" operation, the result of the operation was printed by R and was removed from the memory. If we want to use the result of the operation later in the code, we need to store it into the computer memory. We can do so by creating a variable and storing the result into the variable. When we do this, the computer reserves a physical location on the computer memory and stores the result of the operation at that location, which we can access later using the variable name.
+
+There are some rules and some good-practices when it comes to creating variable names.
+
+Rules:
+
+1. The variable name must start with a letter and can contain number, letter, underscore('_') and period('.').
+2. Special characters such as '#', '&', etc., along with White space (tabs, space) are not allowed in a variable name.
+3. Reserved words or keywords are not allowed to be defined as a variable name.
+
+Good-practices:
+
+1. Use a meaningful name for variables.
+2. Use underscores and/or periods to create more readable variable names.
+
+
+There is also a nice [blog](http://adv-r.had.co.nz/Style.html) on good practices for writing a neat code.
+```{r variables}
+# Store number of apples in a variable
+apples <- 5
+
+# Store number of oranges in a variable
+oranges <- 7
+
+# Total number of fruits
+fruits <- apples + oranges
+```
+
+
+```{r printing_variables, results='hold'}
+# Printing the value of variables
+print("Total number of apples: ")
+print(apples)
+print("Total number of oranges: ")
+print(oranges)
+print("Total number of fruits: ")
+print(fruits)
+```
+
+
+
+### Data types 
+  - Numeric
+  - Character
+  - Logical (boolean)
+
+In the code above, we stored the numeric type of data in the variables. Let's look at the three most useful data types that we can store in an R variable. Read about the full list of data types [here](https://www.tutorialspoint.com/r/r_data_types.htm) 
+
+1. numeric (integer and float values)
+2. character (text / string of characters)
+3. logical (boolean; TRUE/FALSE)
+```{r data_types}
+# Create a variable of type "numeric"
+my_numeric <- 2 + 3
+
+# Create a variable of type "character"
+my_character <- "ATGCCAGATAGAC"
+
+# Create a variable of type "logical"
+my_logical <- TRUE
+```
+
+Let's determine the class of each variable using `class()` function
+```{r printing_datatypes}
+# Check the class of a variable
+class(my_numeric)
+class(my_character)
+class(my_logical)
+
+```
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_data_types}
+# Create one numeric variable, one character variable and one logical variable and print them.
+
+
+
+
+
+```
+
+
+
+&nbsp;
+
+### Operators
+#### *Arithmetic:*
+Now that we are familiar with the basic syntax of the code statement and the most useful data types, let's dive right into the more fun part. Below is a list of operations and the corresponding operator codes for numerical variables.
+
+- Addition: `+`
+- Subtraction: `-`
+- Multiplication: `*`
+- Division: `/`
+- Exponentiation: `^`
+- Modulo: `%%`
+
+
+```{r arithmetic}
+########## Syntax ##########
+# Binary operators: 
+#   variable_1 `operator` variable_2
+############################
+
+# Addition: add 2 and 3
+val_add <- 2 + 3
+
+val_add
+
+# Subtraction
+val_sub <- 10 - 5
+
+val_sub
+
+# Multiplication
+val_multiply <- 12 * 5
+
+val_multiply
+
+# Division
+val_divide <- 10 / 3
+
+val_divide
+
+# Exponentiation
+val_power <- 2 ^ 3
+
+val_power
+
+# Modulo
+val_remainder <- 10 %% 3
+
+val_remainder
+
+```
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_arithmetic}
+# Calculate and print percentages of apples and oranges.
+apples <- 5
+oranges <- 7
+fruits <- apples + oranges
+
+
+
+
+
+
+```
+
+
+&nbsp;
+
+#### *Relational:*
+Once we store the different type of values in to variables, we may next want to compare two values with each other. Below is a list of operations and the corresponding operator codes for comparing two numerical, character or logical variables. The relational operation will come very handy when we want to apply different "if-else" conditions in our code.
+
+- Greater than: `>`
+- Less than: `<`
+- Greater or equal: `>=`
+- Less or equal: `<=`
+- Equal: `==`
+- Not-equal: `!=`
+
+
+```{r relational}
+########## Syntax ##########
+# Binary operators: 
+#   variable_1 `operator` variable_2
+############################
+
+# Is the number of fruits larger than 20?
+fruits > 20
+
+# Do we have less apples than oranges in the basket?
+apples < oranges
+
+
+# Is the numeric 6 same as "six"?
+6 == "six"
+
+
+```
+
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_relational}
+# Exercise 1: Are "ten" and "Ten" the same?
+
+
+
+
+# Exercise 2: Test each relational operator and find out the data type of their output.
+
+
+
+
+
+```
+
+
+&nbsp;
+
+#### *Logical:*
+Above we saw ways make a single comparison at a time, for example, is the number of fruits larger than 20. We can combine and test multiple conditions together to build complex conditions. For example, is the number of fruits larger than 20 and smaller than 50. Below is a list of operations and the corresponding operator codes for combining multiple conditions. 
+
+- And: `&`
+- Or: `|`
+- Not: `!`
+
+```{r logical}
+########## Syntax ##########
+# Binary operators: 
+#   variable_1 `operator` variable_2
+
+# Unary operator: 
+#   `operator` variable_1
+############################
+
+# Let's say we added 3 bananas and 10 strawberries in the basket.
+bananas <- 3
+strawberries <- 10
+fruits <- apples + oranges + bananas + strawberries
+
+
+# And operator
+# Which fruits have more than 4 and less than 9 counts?
+apples > 4 & apples < 9
+oranges > 4 & oranges < 9
+bananas > 4 & bananas < 9
+strawberries > 4 & strawberries < 9
+
+
+
+# Or
+# Which fruits have 3 counts or more than or equal to 7 counts?
+apples == 3 | apples >= 7
+
+
+
+# Not
+# Which fruits DON'T have 3 counts or more than or equal to 7 counts?
+! (apples == 3 | apples >= 7)
+
+```
+**[Read more: operators](https://www.tutorialspoint.com/r/r_operators.htm)**
+
+
+
+
+&nbsp;
+
+### Data structures
+So far we looked at atomic variables, the variables that can store only one value at a time. It can quickly become a massive inconvenience to manage and maintain the atomic variables as the number of values start to increase. To solve this problem, various complex data structures are developed for an efficient storage and access of large amount of data. We will look at all of them one-by-one in this tutorial with examples.
+
+#### *Vectors*
+Vector is basically a set of multiple atomic variables of the **same data type** arranged in some order. A vector is created by supplying a set of values or variables to the `c()` function. The vector can store any of the above mentioned data types. The type of the data stored in a vector can be inspected using the `class()` function. Another important property of the vector is the length, i.e., the number of element in the vector, which can be obtained using the `length()` function.
+
+```{r vectors}
+########## Syntax ##########
+# my_vec <- c(5, 7, 3, 10)
+############################
+
+
+#### Creating a vector
+
+# Create a numeric vector
+my_numeric_vector <- c(20, 100, 30, 25, 60)
+
+
+# Create a character vector
+my_character_vector <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+
+# Print elements of vectors
+print(my_numeric_vector)
+print(my_character_vector)
+
+
+
+# Print length of vectors
+length(my_numeric_vector)
+length(my_character_vector)
+
+
+
+# Assess the structure of vectors
+str(my_numeric_vector)
+str(my_character_vector)
+
+
+
+
+# Using a sequence to create a vector
+# Colon ":" operator
+1:10
+
+
+
+
+
+
+
+
+#### Creating a named vector
+########## Syntax ##########
+# my_vec <- c("name1" = 5, "name2" = 7, "name3" = 3, "name4" = 10)
+############################
+
+# Let's first create a unnamed fruit_basket vector containing fruit counts
+fruit_basket <- c(apples, oranges, bananas, strawberries)
+print(fruit_basket)
+
+
+# Create a fruit_basket vector containing fruit names and fruit counts
+# Remember, the "=" sign here can not be replaced by "<-"
+fruit_basket <- c("Apple" = apples, "Orange" = oranges, "Banana" = bananas, "Strawberry" = strawberries)
+print(fruit_basket)
+
+
+
+# Assess the structure of the vector
+str(fruit_basket)
+
+
+
+
+
+
+
+
+
+#### Selecting elements of a vector
+########## Syntax ##########
+# my_vec[index(s)]
+#    OR
+# my_vec[name(s)]
+############################
+
+# Select orange counts
+fruit_basket[2]
+#    OR
+fruit_basket["Orange"]
+
+
+# Select apple and strawberry counts.
+fruit_basket[c(1, 4)]
+
+
+# Select apple, banana and strawberry counts.
+fruit_basket[c(1, 3, 4)]
+
+
+
+
+
+
+
+
+#### Modifying elements of a vector
+
+# Change the count of bananas from 3 to 20
+fruit_basket["Banana"] <- 20
+print(fruit_basket)
+
+
+# Add two extra values to the fruit_basket vector
+fruit_basket <- c( fruit_basket, c( "Plum" = 10, "Peach" = 13 ) )
+print(fruit_basket)
+
+
+# Deleting specific elements: delete 2nd, 5th and 6th elements from my_character_vector
+print(my_character_vector)
+
+my_character_vector <- my_character_vector[ -c(2,5,6) ]
+
+print(my_character_vector)
+
+
+
+
+
+
+
+
+
+#### Numeric vector operations
+
+# Add 10 to every element of a vector
+fruit_basket + 10
+
+# Find a length of a vector
+length(fruit_basket)
+
+# Count the total number of fruits in the fruit basket.
+sum(fruit_basket)
+
+# Calculate the mean number of fruits in the basket
+mean(fruit_basket)
+
+
+
+
+
+
+
+```
+
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_vector}
+# Exercise 1: Create and print a named vector of day-counts in the first 5 months: January, February, March, April and May (i.e., 31; 28; 31; 30; 31).
+
+
+
+
+# Exercise 2: Select and print the number of days in March
+
+
+
+
+# Exercise 3: Find total number of days in the vector using "+" operator.
+
+
+
+
+```
+
+
+
+
+
+&nbsp;
+
+### Control statements
+Before we dive into other data structures, let's first look at the control statement, the code statements that helps redirect the flow of execution of a series of R operations. Basically, control statements allow you to put some “logic” into your R code, rather than just always executing the same R code every time. Control statements allow you to respond to inputs or to features of the data and execute different R expressions accordingly.
+
+#### *`if..else`*
+The `if..else` allows for testing conditions and acting based on the condition outcome. For example, if there are more apples than oranges, perform one set of operations, otherwise perform a different set of operations.
+
+![Figure: operation of `if..else` statement](C:/Users/ravi_/Box Sync/UCSF Projects/teaching/BMS-225A_2021/r-if-else-statement.jpg)
+```{r if.else}
+########## Syntax ##########
+# if (test_expression) {
+#   statement
+# } else {
+#   statement
+# }
+############################
+
+# Do we have less apples than oranges in the basket?
+# apples < oranges
+# [1] TRUE
+
+# Test and print if we have less apples than oranges.
+if(apples < oranges) {
+  print("Fruit basket has less apples than oranges")
+} else {
+  print("Fruit basket more apples than oranges")
+}
+```
+
+&nbsp;
+
+#### *`for` loop*
+The `for` loop executes a set of operations for a fixed number of times, therefore it is called a loop. For example, loop through every element in the fruit_basket vector and print the fruit counts for each fruit with a well formatted message.
+&nbsp;
+
+![Figure: operation of `for` statement](C:/Users/ravi_/Box Sync/UCSF Projects/teaching/BMS-225A_2021/r-for-loop.jpg)
+```{r for.loop}
+########## Syntax ##########
+# for( i in vector ) {
+#   statement
+# }
+############################
+
+
+# Create a numeric vector, iterate through each element and print them.
+my_numeric_vec <- c(12, 54, 65, 16, 83, 79, 99, 47, 81, 18)
+
+# for loop
+for( i in my_numeric_vec ) {
+  # statement
+  print(i)
+
+}
+
+
+
+# Create a character vector of days of a week, iterate through each element and print every other element in the following form:
+# The value of element # 1 is Mon
+# The value of element # 3 is Wed
+# ....
+# The value of element # 7 is Sun
+
+
+# A vector of days of a week
+my_character_vec <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+# A variable to keep count of iterations
+count <- 0
+
+for( day in my_character_vec) {
+  
+  count <- count + 1
+  
+  if( count %% 2 == 1 ) { 
+  
+    print_message <- paste("The value of element #", count, "is", day)
+    print(print_message)
+    
+  }
+  
+}
+
+
+
+
+```
+
+
+
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_control_st}
+
+# Exercise 1: Iterate through the elements of the following character vector and print each element.
+planet_names <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
+
+
+
+
+
+
+
+
+
+
+# Exercise 2:
+# Remember the following code where we had to manually type one statement per element to find fruits that had 
+# more than 4 and less than 9 counts? Remember how inefficient the code was and how non-user-friendly the output was?
+    # Which fruits have more than 4 and less than 9 counts?
+    # apples > 4 & apples < 9
+    # oranges > 4 & oranges < 9
+    # bananas > 4 & bananas < 9
+    # strawberries > 4 & strawberries < 9
+
+# Let's add more fruits to the fruit basket and write a code that iterates through each element of the fruit_basket vector and prints if more quantities should be bought if the fruit count drops below 10.
+
+# Creating a fruit_basket vector.
+fruit_basket <- c(apples = 15, bananas = 10, peaches = 4, oranges = 7, strawberries = 20, kiwis = 9, mangoes = 1, plums = 6)
+
+
+
+
+
+
+
+
+
+
+# Exercise 3
+# Use selection by comparison (e.g. fruit_basket < 10) to select fruits that are below 10 counts.
+
+
+
+
+
+```
+
+
+&nbsp;
+
+### Data structures
+#### *Factors*
+Factor is a statistical data structure that is designed specifically for storing categorical variables, variables that have a fixed and known set of possible values, e.g. gender of surveyed individuals. 
+Three major advantages of using factors over vectors are: 
+
+
+1. the factor prevents typos;
+2. the factor allows sorting of elements in a meaningful way; and
+3. factors make it very easy to modify the existing values. 
+
+The factors are created by supplying a vector of individual categorical values and a vector of levels - all possible values the factor can hold - to the function `factor()`. If you omit the levels, they’ll be taken from the data in alphabetical order.
+```{r factors}
+########## Syntax ##########
+# my_factor <- factor( c("M","F","F","M","F"), levels = c("F","M") )
+############################
+
+
+#### Creating factors
+
+## Create a factor for storing marital status of 10 sampled individuals for your research study.
+# Create a vector for levels
+marital_status_levels <- c("married", "divorced", "single", "separated")
+
+# Create a vector of individual values
+marital_status_values <- c("single", "single", "separated", "married", "single", "married", "separated", "divorced", "single", "married")
+
+# Create a factor using factor()
+# Remember, the "=" sign here can not be replaced by "<-"
+marital_status_factor <- factor( marital_status_values, levels = marital_status_levels  )
+
+# Print the factor
+# Notice the orders of levels and values.
+print(marital_status_factor)
+
+# Print the levels alone.
+levels(marital_status_factor)
+
+# Use class() to determine the class of the data structure
+class(marital_status_factor)
+
+
+
+
+
+
+
+
+## 1) the factor prevents typos
+## Add two new entries in the factor
+
+# Add first entry.
+marital_status_factor[11] <- "married"
+print(marital_status_factor)
+
+# Add a second entry that has a typo
+marital_status_factor[12] <- "marriied"
+print(marital_status_factor)
+
+
+
+
+
+
+## 2) the factor allows sorting of elements in a meaningful way
+## Sort the factor in meaningful ways using sort()
+
+# Notice that the function sort() sorts the elements of the vector marital_status_values in an alphabetical order.
+sort(marital_status_values)
+
+# Notice that the function sort() sorts the elements of the factor marital_status_factor in the order of the levels.
+sort(marital_status_factor)
+
+# Sort values of the factor in the following order: single, married, separated, divorced
+marital_status_factor <- factor( marital_status_values, levels = c("single", "married", "separated", "divorced")  )
+
+# Notice the orders of levels and values
+print(marital_status_factor)
+
+# Notice the orders of levels and values
+sort(marital_status_factor)
+
+
+
+
+
+## 3) factors make it very easy to modify the existing values
+## Change all "married" values to "MARRIED"
+
+# First, get the levels
+marital_status_levels <- levels(marital_status_factor)
+
+# Change the second value to "MARRIED"
+marital_status_levels[2] <- "MARRIED"
+
+# Assign these modified levels to marital_status_factor
+levels(marital_status_factor) <- marital_status_levels
+
+print(marital_status_factor)
+
+
+
+
+
+
+
+
+
+#### Selecting specific elements from the factor
+
+# Select the 4th element
+marital_status_factor[4]
+
+# Select the 2nd, 5th and 6th elements
+marital_status_factor[c(2,5,6)]
+
+# Select the 1st, 3rd, 7th, 9th and 10th elements
+marital_status_factor[c(T,F,T,F,F,F,T,F,T,T)]
+
+
+
+
+
+
+
+
+
+#### Modifying elements of a factor
+
+## Removing specific elements
+marital_status_factor[-c(3,6,7)]
+
+
+
+
+
+
+
+
+```
+
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_factors}
+# Exercise 1: Create a factor for storing gender of 10 surveyed individuals using the following vector of levels.
+# Vector of levels
+gender_levels <- c("f","m")
+
+# Write a code to create the factor
+
+
+
+# Write a code to change all "f" values to "Female" and all "m" values to "Male"
+
+
+
+
+```
+  
+&nbsp;
+
+#### *Matrix*
+A matrix is a collection of elements of the **same data type** (numeric, character, or logical) arranged into a fixed number of rows and columns. You can also interpret the matrix as a two dimensional vector. A matrix can be created by supplying a vector to the `matrix()` function along with the instruction on how to convert the vector into a matrix.
+
+```{r matrix}
+########## Syntax ##########
+# my_matrix <- matrix( 1:9, nrow = 3, byrow = TRUE )
+############################
+
+
+#### Creating a matrix
+
+# Creating a 3 x 3 matrix by supplying a vector of 9 values (1:9).
+my_matrix <- matrix( 1:9, nrow = 3 )
+# Notice how the matrix is filled in a column-wise manner
+print(my_matrix)
+
+
+# Filling matrix in a row-wise manner
+my_matrix <- matrix( 1:9, nrow = 3, byrow = TRUE )
+print(my_matrix)
+
+
+# Add elements of different types.
+my_matrix <- matrix( c( 1:8, "A"), nrow = 3, byrow = TRUE )
+print(my_matrix)
+
+
+# Alternate ways of creating a matrix.
+
+# Column-wise
+my_matrix <- cbind( c(1,2,3), c(4,5,6), c(7,8,9) )
+print(my_matrix)
+
+# Row-wise
+my_matrix <- rbind( c(1,2,3), c(4,5,6), c(7,8,9) )
+print(my_matrix)
+
+
+# Setting column names
+colnames(my_matrix) <- c("A","B","C")
+print(my_matrix)
+
+# Setting row names
+rownames(my_matrix) <- c("X","Y","Z")
+print(my_matrix)
+
+
+# Use class() to determine the class of the data structure
+class(my_matrix)
+
+
+
+
+
+#### Accessing specific elements
+
+# Access element on the second row and the third column
+my_matrix[2, 3]
+
+
+# Access elements on the first row and second and third columns
+my_matrix[1, c(2,3)]
+
+
+# Access all elements on the third row.
+my_matrix[3, ]
+
+
+# Accessing elements on first and second rows using a logical vector
+my_matrix[ c(T, F, T), ]
+
+
+
+
+
+
+
+
+
+#### Modifying the matrix
+
+# Adding a row
+rbind( my_matrix, c(40, 23, 76) )
+
+# Adding a column
+cbind( my_matrix, c(40, 23, 76) )
+
+# Modifying individual values
+my_matrix[2, 3] <- 100
+print(my_matrix)
+
+my_matrix[2, ] <- c(13,11,32)
+print(my_matrix)
+
+# Transpose matrix
+t(my_matrix)
+
+
+
+
+
+
+
+
+
+#### Matrix operation
+
+# Add 10 to each element
+my_matrix + 10
+
+# Divide each element by 10
+my_matrix / 10
+
+
+# Add two matrices of same dimension
+# Creates a new matrix with each element in the first matrix is added to the corresponding element in the second matrix
+my_matrix + my_matrix
+
+
+# Calculate sum / mean of each column or rows.
+colSums(my_matrix)
+rowSums(my_matrix)
+colMeans(my_matrix)
+rowMeans(my_matrix)
+
+```
+
+
+
+
+&nbsp;
+
+#### *List*
+A vector with all elements of the same data type is called an atomic vector, whereas a vector with elements of **different data types** is called a list. A true power of a list is in it's ability to store data structures of different types, e.g. vector, matrix, list, data.frame, etc. A list can be created by supplying individual objects to the `list()` function. 
+```{r lists}
+########## Syntax ##########
+# my_list <- list( 1, "A", TRUE, c(1,2,3) )
+############################
+
+
+#### Creating a list
+
+# Create a list containing one numeric, one character, one logical, one vector, one factor and one matrix
+my_list <- list( "one_numeric" = 1, "one_char" = "A", "one_logical" = TRUE, "fruit_vector" = fruit_basket, "marital_factor" = marital_status_factor, "test_matrix" = my_matrix )
+
+# Print the list
+print(my_list)
+
+# Print structure of the list
+str(my_list)
+
+
+
+
+
+
+
+
+#### Selecting specific elements
+
+# Using the index of the element
+my_list[[4]]
+
+# Using the name of the element
+my_list$test_matrix
+
+
+# Select the second row of the test_matrix (the 6th element)
+#1
+my_list[[6]][2,]
+#2
+my_list$test_matrix[2,]
+
+
+# Subsetting the list
+my_list[5]
+class(my_list[5])
+
+my_list[[5]]
+class(my_list[[5]])
+
+my_list[ 3:5 ]
+class(my_list[ 3:5 ])
+
+
+
+
+
+
+
+
+
+#### Modifying a list
+
+# Create a new list and add that to my_list
+my_list[["new_list1"]] <- list("Mon" = "Monday", "Tue" = "Tuesday", "Wed" = "Wednesday")
+str(my_list)
+
+my_list$"new_list2" <- list("Jan" = "Januart", "Feb" = "February", "Mar" = "March")
+str(my_list)
+
+
+# Deleting an element
+my_list[[6]] <- NULL
+str(my_list)
+
+
+
+
+
+
+
+
+```
+
+
+&nbsp;
+
+##### **Exercise**
+```{r exercise_list}
+# Exercise 1: Create a list with three elements, first being a numeric vector,  second a character atomic variable and third a 2 x 2 matrix.
+
+
+
+
+
+
+
+
+
+
+
+# Exercise 2: Convert the below table into a list, where the names of the list are the ids and each element of the list is a list containing data for each individual. Below is an example structure.
+
+
+# "id1" = list
+#     		  |--- "name" = "John"
+# 		      |
+# 		      |--- "gender" = "M"
+# 	    	  |
+# 	    	  |--- "age" = 17
+# 	    	  |
+# 	    	  |--- "language" = vector("language1", "language2", etc...)
+# 	    	  |
+# 	    	  |--- "grades" = list
+# 	    	    	    	  			|--- "math" = "A"
+# 	    		    	       			|--- "biology" = "B"
+# 		    	    	  	     		|--- "science" = "A+"
+
+
+
+survey <- list()
+survey[["id1"]] <- 
+  list(
+    "name" = "John",
+    "gender" = "M", 
+    "age" = 17, 
+    "languages" = c("English", "German"), 
+    "grades" = list("math" = "A", "biology" = "B", "science" = "A+") 
+  )
+survey[["id2"]] <- 
+  list(
+    "name" = "Sarah",
+    "gender" = "F", 
+    "age" = 19, 
+    "languages" = c("English", "Spanish", "French"), 
+    "grades" = list("math" = "B", "biology" = "A+", "science" = "A-") 
+  )
+survey[["id3"]] <- 
+  list(
+    "name" = "Beth",
+    "gender" = "F", 
+    "age" = 18, 
+    "languages" = c("English"), 
+    "grades" = list("math" = "A+", "biology" = "A-", "science" = "B+") 
+  )
+
+
+
+```
+
+id  |  name      | gender | age | languages                       | grades
+----|------------|--------|-----|---------------------------------|---------------------------------
+id1 |  "John"    | "M"    | 17  | "English", "German"             | math="A"; biology="B"; science="A+"
+id2 |  "Sarah"   |  "F"   | 19  | "English", "Spanish", "French"  | math="B"; biology="A+"; science="A-"
+id3 |  "Beth"    |  "F"   | 18  | "English"                       | math="A+"; biology="A-"; science="B+"
+
+
+
+
+&nbsp;
+
+#### *Data frame*
+Data frame is a two dimensional data structure. It is a special case of a list of vectors, where the vectors are of the equal length. Each vector forms a column and contents of the vector form the rows. One major difference between the matrix and the data frame is that we can store columns of different data types in data frames, whereas, as you may remember from above, the matrix can hold only one data type. Since the data frame is a special case of the list, which is also a two dimensional data structure like matrix, the functions and operators that work for list and matrix also work for the  data frames. A data frame can be created by supplying ("name" = vector) pairs to the `data.frame()` function. When we read tables from CSV/TSV files, the data is stored in data frames.
+```{r dataframes}
+########## Syntax ##########
+# my_df <- data.frame( "col1" = vector_1, "col2" = vector_2, "col3" = vector_3 )
+############################
+
+### Creating a data frame
+
+# Let's start by creating a list of vectors of the same length.
+my_another_list <- list( "name" = c("Mike", "Mira", "Neil"), "gender" = c("M", "F", "M"),  "age" = c(30, 40, 50) )
+print(my_another_list)
+class(my_another_list)
+
+# Now let's create a data frame using the same data.
+my_df <- data.frame( "name" = c("Mike", "Mira", "Neil"), "gender" = c("M", "F", "M"),  "age" = c(30, 40, 50) )
+
+
+# Notice that the "names" used for each vector become column names, and the numbers 1 through the length of the vectors become row names. We can set more meaningful row names by supplying a vector of row names of the same length as other vector to the data.frame() function using "row.names" parameter. Alternatively, we can set the row names using "rownames()" function in the same manner as we did for the matrix.
+print(my_df)
+class(my_df)
+
+
+# Notice the similarities and differences in the structure of my_another_list and my_df. By default, the character vectors are converted to factors. This behavior can be changed by setting stringsAsFactors = FALSE in the data.frame() function.
+str(my_another_list)
+str(my_df)
+
+# Preventing conversion of the character vector to factor.
+my_df <- data.frame( "name" = c("Mike", "Mira", "Neil"), "gender" = c("M", "F", "M"),  "age" = c(30, 40, 50), stringsAsFactors = FALSE )
+
+
+
+
+
+
+
+
+
+#### Selecting specific elements
+# Note: Since the data frame is a special case of the list, which is also a two dimensional data structure like matrix, the functions and operators that work for list and matrix also work for the  data frames. 
+
+# Selecting elements in the first three and first two columns
+my_df[1:3, 1:2]
+
+# Selecting the entire 1st column
+my_df[, 1]
+#    OR
+my_df$name
+#    OR
+my_df[["name"]]
+
+
+
+
+
+
+
+
+
+#### Modifying a data frame
+
+# Modifying a specific element. Change the name of the first individual from "Mike" to "Michael"
+my_df[1, 1] <- "Michael"
+#    OR
+my_df[1, "name"] <- "Michael"
+#    OR
+my_df[1, ]$name <- "Michael"
+print(my_df)
+
+# Add a new column
+my_df <- cbind(my_df, "eye_color" = c("black","blue","black"), stringsAsFactors = FALSE)
+#    OR
+my_df$eye_color <- c("black","blue","black")
+print(my_df)
+
+
+# Add a new row
+my_df <- rbind(my_df, c("Sarah","F",45,"green"))
+print(my_df)
+
+
+# Deleting columns
+my_df$eye_color <- NULL
+print(my_df)
+
+
+# Deleting rows
+my_df <- my_df[-4,]
+print(my_df)
+
+
+
+
+
+
+
+
+#### Useful functions for a data frame.
+
+# Print number of columns and rows
+ncol(my_df)
+nrow(my_df)
+
+# Print top or bottom 'n' rows
+head(my_df, n = 2)
+tail(my_df, n = 2)
+
+```
+
+
+
+&nbsp;
+
+### File reading-writing
+Matrix/table files containing columns separated by tabs or commas can be read in R using `read.table()` and `read.csv()` functions. The data is stored in data frames.
+```{r fileio}
+# Let's write the my_df in a csv file first.
+write.csv(x = my_df, file = "survey.csv", quote = F)
+
+# Read in the survey.csv and store the data in "survey_data" data frame
+survey_data <- read.csv(file = "survey.csv", sep = ",", header = T, row.names = 1)
+
+print(survey_data)
+class(survey_data)
+
+```
+
+
+
+
+&nbsp;
+
+### R functions
+Functions are used to logically break our code into simpler parts which become easy to maintain and understand. The functions are most frequently used for running a set of tasks multiple times at different locations in the code. Read more about writing functions in [here](https://www.datamentor.io/r-programming/function/).
+```{r functions}
+########## Syntax ##########
+# my_fun <- function( parameter_1, parameter_2, parameter_3, .... ) {
+#  statement
+#  return()
+#}
+############################
+
+
+# Write a function for calculating Fahrenheit to Celsius calculator (Equation: (32F − 32) × 5/9 = 0C)
+f_to_c <- function(fahrenheit = 0) {
+  celsius = (fahrenheit - 32) * 5 / 9
+  return(celsius)
+}
+
+celsius = f_to_c(32)
+print(celsius)
+
+
+```
+
+
+
+
+### References:
+- [Good practices for variable names, spacing and indentation](http://adv-r.had.co.nz/Style.html)
+- [A free DataCamp course on introduction to R](https://campus.datacamp.com/courses/free-introduction-to-r) (Strongly recommended)
+- [A free R tutorial](https://www.datamentor.io/r-programming/)
+- [R for data science book](https://r4ds.had.co.nz/)
+- [Advanced R book](https://adv-r.hadley.nz/)
+
+
+
+
+
+
